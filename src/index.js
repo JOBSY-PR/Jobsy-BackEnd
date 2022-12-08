@@ -16,8 +16,9 @@ const port = process.env.PORT || 3000;
 
 app.use(
   cors({
-    origin: "https://jobsy.up.railway.app/",
-    credentials: true,
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 app.use(express.json());
@@ -29,8 +30,8 @@ app.all("/", (req, res) => {
 });
 
 app.use("/review", protect, reviewRouter);
-app.use("/employee", employeeRouter);
-app.use("/employer", employerRouter);
+app.use("/employee", protect, employeeRouter);
+app.use("/employer", protect, employerRouter);
 app.use("/job", jobRouter);
 app.use("/login", signIn);
 app.use("/", createUser);
