@@ -3,6 +3,9 @@ import cors from "cors";
 import morgan from "morgan";
 import dotenv from "dotenv";
 import reviewRouter from '..//Routes/Review/review.js'
+import employeeRouter from "../Routes/Employee/employee.js"
+import employerRouter from "../Routes/Employer/employer.js"
+import jobRouter from "../Routes/Job/job.js"
 
 dotenv.config();
 
@@ -19,6 +22,9 @@ app.get('/',(req,res)=>{
 })
 
 app.use("/review", reviewRouter)
+app.use("/employee", employeeRouter)
+app.use("/employer", employerRouter)
+app.use("/job", jobRouter)
 
 export const start = () => {
   app.listen(port, () => {
