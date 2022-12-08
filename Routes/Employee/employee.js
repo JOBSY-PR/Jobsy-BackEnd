@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { body } from "express-validator";
+import { createToken } from "../Authentication/auth.js";
 import { prisma } from "../Database/db.js";
 import { handleErrors } from "../Middleware/handleErrors.js";
 
@@ -26,6 +27,9 @@ router.post(
       if (!employee) {
         throw new Error("Emoployee could not be created");
       }
+
+      const token =  createToken(employee);
+      console.log(token);
 
       res.json({ message: "Employee created successfully" });
     } catch (e) {

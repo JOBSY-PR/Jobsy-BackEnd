@@ -6,6 +6,7 @@ const router = Router();
 
 router.post("/", async (req, res) => {
   try {
+    
     const job = await prisma.job.create({
       data: {
         title: req.body.title,
