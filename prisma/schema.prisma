@@ -11,15 +11,16 @@ datasource db {
 }
 
 model job {
-  id        Int      @id @default(autoincrement())
-  title     String
-  employer  String
-  location  String
-  salary    String
-  imageUrl  String
-  isClaimed Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @default(now()) @updatedAt
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  employer    String
+  location    String
+  salary      String
+  imageUrl    String
+  isClaimed   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }
 
 model Employee {
@@ -35,7 +36,7 @@ model Employee {
 model Employer {
   id        Int      @id @default(autoincrement())
   firstName String
-  lastname  String
+  lastName  String
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
