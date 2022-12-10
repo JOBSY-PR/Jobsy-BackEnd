@@ -29,9 +29,9 @@ app.all("/", (req, res) => {
   res.send("This is the main page");
 });
 
-app.use("/review", protect, reviewRouter);
-app.use("/employee", protect, employeeRouter);
-app.use("/employer", protect, employerRouter);
+app.use("/review", reviewRouter);
+app.use("/employee", employeeRouter);
+app.use("/employer",  employerRouter);
 app.use("/job", jobRouter);
 app.use("/login", signIn);
 app.use("/", createUser);
