@@ -14,7 +14,7 @@ router.post("/", async (req, res) => {
         employer: req.body.employer,
         location: req.body.location,
         salary: req.body.salary,
-        imageUrl: req.body.imageUrl,
+        
       },
     });
     if (!job) {
