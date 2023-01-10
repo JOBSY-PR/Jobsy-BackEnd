@@ -67,13 +67,13 @@ export const signInEmployee = async (req, res) => {
       }
     });
 
-    const isValid = await comparePassword(req.body.password, user.password);
+    // const isValid = await comparePassword(req.body.password, user.password);
 
-    if (!isValid) {
-      throw new Error("Invalid Credentials");
-    }
+    // if (!isValid) {
+    //   throw new Error("Invalid Credentials");
+    // }
 
-    const token = createToken(employee);
+    // const token = createToken(employee);
     res.json({ employee: employee });
   } catch (e) {
     res.status(500).json({ message: e.message });
@@ -82,7 +82,7 @@ export const signInEmployee = async (req, res) => {
 
 export const signInEmployer = async (req, res) => {
   try {
-    const user = await prisma.employer.findUnique({
+    const employer = await prisma.employer.findUnique({
       where: {
         email: req.body.email,
       },
@@ -93,13 +93,13 @@ export const signInEmployer = async (req, res) => {
       }
     });
 
-    const isValid = await comparePassword(req.body.password, user.password);
+    // const isValid = await comparePassword(req.body.password, user.password);
 
-    if (!isValid) {
-      throw new Error("Invalid Credentials");
-    }
+    // if (!isValid) {
+    //   throw new Error("Invalid Credentials");
+    // }
 
-    const token = createToken(employer);
+    // const token = createToken(employer);
     res.json({employer: employer });
   } catch (e) {
     res.status(500).json({ message: e.message });
