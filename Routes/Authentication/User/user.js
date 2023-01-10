@@ -4,32 +4,67 @@ import { prisma } from "../../Database/db.js";
 import { comparePassword, hashPassword, createToken } from "../auth.js";
 
 
-export const createUser = async (req, res) => {
+export const createEmployee = async (req, res) => {
   try {
-    const user = await prisma.user.create({
+    const employee = await prisma.employee.create({
       data: {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
+        name: req.body.name,
+        phone: req.body.phone,
         email: req.body.email,
-        password: await hashPassword(req.body.password),
+        password: req.body.password,
       },
+      select:{
+        id:true,
+        name: true,
+        email: true,
+      }
     });
-    if (!user) {
-      throw new Error("User could not be created");
+    if (!employee) {
+      throw new Error("Employee could not be created");
     }
-    const token = createToken(user);
-    res.json({ message: "User created successully", token: token });
+    const token = createToken(employee);
+    res.json({ employee: employee });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
 };
 
-export const signIn = async (req, res) => {
+export const createEmployer = async (req, res) => {
   try {
-    const user = await prisma.user.findUnique({
+    const employer = await prisma.employer.create({
+      data:  {
+        name: req.body.name,
+        phone: req.body.phone,
+        email: req.body.email,
+        password: req.body.password,
+      },
+      select:{
+        id:true,
+        name: true,
+        email: true,
+      }
+    });
+    if (!employer) {
+      throw new Error("Employer could not be created");
+    }
+    const token = createToken(employer);
+    res.json({employer: employer });
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+};
+
+export const signInEmployee = async (req, res) => {
+  try {
+    const employee = await prisma.employee.findUnique({
       where: {
         email: req.body.email,
       },
+      select:{
+        id:true,
+        name: true,
+        email: true,
+      }
     });
 
     const isValid = await comparePassword(req.body.password, user.password);
@@ -38,8 +73,34 @@ export const signIn = async (req, res) => {
       throw new Error("Invalid Credentials");
     }
 
-    const token = createToken(user);
-    res.json({ message: "User logged in successfully", token: token });
+    const token = createToken(employee);
+    res.json({ employee: employee });
+  } catch (e) {
+    res.status(500).json({ message: e.message });
+  }
+};
+
+export const signInEmployer = async (req, res) => {
+  try {
+    const user = await prisma.employer.findUnique({
+      where: {
+        email: req.body.email,
+      },
+      select:{
+        id:true,
+        name: true,
+        email: true
+      }
+    });
+
+    const isValid = await comparePassword(req.body.password, user.password);
+
+    if (!isValid) {
+      throw new Error("Invalid Credentials");
+    }
+
+    const token = createToken(employer);
+    res.json({employer: employer });
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
