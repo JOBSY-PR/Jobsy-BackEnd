@@ -14,7 +14,6 @@ router.post("/", async (req, res) => {
         employer: req.body.employer,
         location: req.body.location,
         salary: req.body.salary,
-        
       },
     });
     if (!job) {
@@ -41,25 +40,55 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put('/:id', async(req,res)=>{
-    try{
-        const job = await prisma.job.update({
-            where:{
-                id: req.params.id
-            },
-            data:{
-                title: req.body.title,
-                description: req.body.description,
-                employer: req.body.employer,
-                location: req.body.location,
-                salary: req.body.salary,
-                imageUrl: req.body.imageUrl,
-                isClaimed: req.body.isClaimed
-            }
-        })
-    }catch(e){
-        res.status(500).json({message:e.message})
-    }
+// router.put('/:id', async(req,res)=>{
+//     try{
+//         const job = await prisma.job.update({
+//             where:{
+//                 id: req.params.id
+//             },
+//             data:{
+//                 title: req.body.title,
+//                 description: req.body.description,
+//                 employer: req.body.employer,
+//                 location: req.body.location,
+//                 salary: req.body.salary,
+//                 imageUrl: req.body.imageUrl,
+//                 isClaimed: req.body.isClaimed
+//             }
+//         })
+//     }catch(e){
+//         res.status(500).json({message:e.message})
+//     }
+// })
+
+router.delete('/:id', async(req,res)=>{
+  try{
+      const job = await prisma.job.delete({
+          where:{
+              id: req.params.id
+          },
+      })
+  }catch(e){
+      res.status(500).json({message:e.message})
+  }
 })
 
+router.put('/:id', async(req,res)=>{
+  try{
+      const job = await prisma.job.update({
+          where:{
+              id: parseInt(req.params.id)
+          },
+          data:{
+              status: "TAKEN"
+          }
+      })
+      if(!job){
+        throw new Error("Job not updated")
+      }
+      res.json({message:"Job updated successfully"})
+  }catch(e){
+      res.status(500).json({message:e.message})
+  }
+})
 export default router
