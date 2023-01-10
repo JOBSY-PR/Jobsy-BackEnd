@@ -38,13 +38,13 @@ app.all("/", (req, res) => {
   res.send("This is the main page");
 });
 
-app.use("/review", reviewRouter);
-app.use("/job", jobRouter);
+app.use("/review", cors(),reviewRouter);
+app.use("/job", cors(),jobRouter);
 
-app.use("/login/employee", signInEmployee);
-app.use("/login/employer", signInEmployer);
-app.use("/register/employee", createEmployee);
-app.use("/register/employer", createEmployer);
+app.use("/login/employee",cors(), signInEmployee);
+app.use("/login/employer", cors(),signInEmployer);
+app.use("/register/employee",cors(), createEmployee);
+app.use("/register/employer",cors(), createEmployer);
 
 app.use("/bid", bidRouter);
 
