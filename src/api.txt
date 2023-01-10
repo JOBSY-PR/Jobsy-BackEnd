@@ -1,0 +1,49 @@
+1. /register/employee - register an employee [POST]
+   - name
+   - phone
+   - email
+   - password
+2. /register/employer - register an employer [POST]
+    - name
+    - phone
+    - email
+    - password
+3. /login/employee - login an employee [POST]
+    - email
+    - password
+4. /login/employer - login an employer [POST]
+    - email
+    - password
+
+
+
+5. /job - create a job [POST]
+    - title
+    - description
+    - employerId
+    - location
+    - salary
+6. /job - fetch all the jobs [GET]
+7. /job/:id - delete a job of an id [DELETE]
+8. /job/:id - update the status of a job to taken [PUT]
+9. /job/employer/:id - get jobs for a particular employer id [GET]
+
+
+
+10. /bid - create a bid [POST]
+    - name
+    - description
+    - belongToJob
+    - belongToEmployee
+11. /bid/:id - get all the bids for a particular job id [GET]
+12. /bid/employee/:id - get all the bids for a particular employee id [GET]
+
+
+
+13. /review - create a review [POST]
+    - id
+    - review
+14. /review - get all the reviews [GET]
+15. /review/:id - update the review of a particular id [PUT]
+    - id [optional]
+    - review [optional]
