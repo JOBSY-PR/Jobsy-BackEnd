@@ -38,6 +38,7 @@ model bid {
   description       String
   name              String
   belongToEmployee  Int
+  job String
   belongsToEmployee employee @relation(fields: [belongToEmployee], references: [id])
   belongToJob       Int
   belongsToJob      job      @relation(fields: [belongToJob], references: [id])
