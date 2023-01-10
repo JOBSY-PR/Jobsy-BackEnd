@@ -12,6 +12,7 @@ router.post('/', async (req,res)=>{
                 name: req.body.name,
                 description: req.body.description,
                 belongToJob: req.body.belongToJob,
+                job: req.body.job,
                 belongToEmployee: req.body.employeeId,
             },
         })
