@@ -11,7 +11,7 @@ router.post("/", async (req, res) => {
       data: {
         title: req.body.title,
         description: req.body.description,
-        employer: req.body.employer,
+        employerId: req.body.employerId,
         location: req.body.location,
         salary: req.body.salary,
       },
@@ -89,6 +89,25 @@ router.put('/:id', async(req,res)=>{
       res.json({message:"Job updated successfully"})
   }catch(e){
       res.status(500).json({message:e.message})
+  }
+})
+
+router.get('/employer/:id', async(req, res)=>{
+  try{
+    const jobs = await prisma.job.findMany({
+      where:{
+        employerId: parseInt(req.params.id)
+      }
+    });
+
+    if(!jobs){
+       throw new Error("Jobs could not be fetched")
+    }
+
+    res.json(jobs)
+
+  }catch(e){
+    res.status(500).json({message:e.message})
   }
 })
 export default router
