@@ -41,7 +41,7 @@ model bid {
   job               String
   isSelected     Boolean  @default(false)
   belongsToEmployee employee @relation(fields: [belongToEmployee], references: [id])
-  belongToJob       Int    @unique
+  belongToJob       Int    
   belongsToJob      job      @relation(fields: [belongToJob], references: [id])
 
   // @@id([belongToEmployee, belongToJob])
