@@ -40,7 +40,7 @@ model bid {
   belongToEmployee  Int
   job String
   belongsToEmployee employee @relation(fields: [belongToEmployee], references: [id])
-  belongToJob       Int
+  belongToJob       Int @unique
   belongsToJob      job      @relation(fields: [belongToJob], references: [id])
 }
 
