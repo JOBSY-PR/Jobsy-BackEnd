@@ -44,7 +44,7 @@ router.put('/:id', async(req,res)=>{
     try{
         const job = await prisma.job.update({
             where:{
-                id: req.params.id
+                id: parseInt(req.params.id)
             },
             data:{
                 title: req.body.title,
@@ -66,7 +66,7 @@ router.delete('/:id', async(req,res)=>{
   try{
       const job = await prisma.job.delete({
           where:{
-              id: req.params.id
+              id: parseInt(req.params.id)
           },
           
       })
@@ -83,7 +83,7 @@ router.delete('/status/:id', async(req,res)=>{
   try{
       const job = await prisma.job.delete({
           where:{
-              id: req.params.id
+              id: parseInt(req.params.id)
           },
       })
   }catch(e){
