@@ -87,7 +87,7 @@ router.put('/select/:id', async(req,res)=>{
                 id: parseInt(req.params.id)
             },
             data:{
-                isClaimed: true,
+                isSelected: true,
             }
         })
 
