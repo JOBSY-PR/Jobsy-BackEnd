@@ -23,7 +23,7 @@ export const createEmployee = async (req, res) => {
       throw new Error("Employee could not be created");
     }
     const token = createToken(employee);
-    res.json({ employee: employee });
+    res.json(employee );
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
@@ -48,7 +48,7 @@ export const createEmployer = async (req, res) => {
       throw new Error("Employer could not be created");
     }
     const token = createToken(employer);
-    res.json({employer: employer });
+    res.json(employer );
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
@@ -74,7 +74,7 @@ export const signInEmployee = async (req, res) => {
     // }
 
     // const token = createToken(employee);
-    res.json({ employee: employee });
+    res.json(employee );
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
@@ -100,7 +100,7 @@ export const signInEmployer = async (req, res) => {
     // }
 
     // const token = createToken(employer);
-    res.json({employer: employer });
+    res.json(employer );
   } catch (e) {
     res.status(500).json({ message: e.message });
   }
