@@ -8,7 +8,7 @@ router.post("/", body("review").isString(), handleErrors, async (req, res) => {
   try {
     const review = await prisma.review.create({
       data: {
-        id: req.user.id,
+        id: req.body.id,
         review: req.body.review,
       },
     });
@@ -35,11 +35,11 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.put('/', body("review").isString(), handleErrors,async(req,res)=>{
+router.put('/:id', body("review").isString(), handleErrors,async(req,res)=>{
     try{
         const review = await prisma.review.update({
             where:{
-                id: req.user.id
+                id: req.params.id
             },
             data:{
                 review: req.body.review
