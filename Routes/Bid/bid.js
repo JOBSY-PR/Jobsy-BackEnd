@@ -26,6 +26,23 @@ router.post('/', async (req,res)=>{
     }
 })
 
+router.delete('/:id', async (req,res)=>{
+    try{
+        const bid = await prisma.bid.delete({
+            where:{
+                id: parseInt(req.params.id)
+            }
+        })
+        if(!bid){
+            throw new Error('Bid could not be deleted')
+        }
+
+        res.json({message:'Bid deleted successfully'})
+    }catch(e){
+        res.status(500).json({message:e.message})
+    }
+})
+
 router.get('/:id', async(req,res)=>{
     try{
         const bids = await prisma.bid.findMany({
