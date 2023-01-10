@@ -11,7 +11,8 @@ router.post('/', async (req,res)=>{
             data:{
                 name: req.body.name,
                 description: req.body.description,
-                belongToJob: req.body.id
+                belongToJob: req.body.belongToJob,
+                belongToEmployee: req.body.employeeId,
             },
         })
         if(!bid){
@@ -35,6 +36,25 @@ router.get('/:id', async(req,res)=>{
         if(!bids){
             throw new Error('Bids could not be fetched')
         }
+        res.json(bids)
+
+    }catch(e){
+        res.status(500).json({message:e.message})
+    }
+})
+
+router.get('/employee/:id', async(req,res)=>{
+    try{
+        const bids = await prisma.bid.findMany({
+            where:{
+                belongToEmployee: parseInt(req.params.id)
+            }
+        });
+
+        if(!bids){
+            throw new Error('Bids could not be fetched')
+        }
+
         res.json(bids)
 
     }catch(e){
