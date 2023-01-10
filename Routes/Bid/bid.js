@@ -80,4 +80,24 @@ router.get('/employee/:id', async(req,res)=>{
     }
 })
 
+router.put('/select/:id', async(req,res)=>{
+    try{
+        const bidComplete = await prisma.bid.update({
+            where: {
+                id: parseInt(req.params.id)
+            },
+            data:{
+                isClaimed: true,
+            }
+        })
+
+        if(!bidComplete){
+            throw new Error('Bid could not be completed')
+        }
+        res.json({message: "Bid has been selected"})
+    }catch(e){
+        res.status(500).json({message:e.message})
+    }
+})
+
 export default router;
