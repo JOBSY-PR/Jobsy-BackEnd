@@ -22,6 +22,14 @@ model user {
   // job     job[]
 }
 
+model bid {
+  id           Int    @id @default(autoincrement())
+  description  String
+  name         String
+  belongToJob  Int
+  belongsToJob job    @relation(fields: [belongToJob], references: [id])
+}
+
 model job {
   id          Int      @id @default(autoincrement())
   title       String
@@ -29,6 +37,7 @@ model job {
   employer    String
   location    String
   salary      String
+  status      status @default(ACTIVE)
   imageUrl    String   @default("no image")
   isClaimed   Boolean  @default(false)
   createdAt   DateTime @default(now())
@@ -36,12 +45,18 @@ model job {
   // user        user      @relation(fields: [userId], references: [id])
   // userId      Int @default(1)
   // claimed     claimed[]
+  bid         bid[]
 }
 
 model Review {
   id        Int      @id @default(autoincrement())
   review    String
   createdAt DateTime @default(now())
+}
+
+enum status {
+  ACTIVE
+  TAKEN
 }
 
 // model claimed {
