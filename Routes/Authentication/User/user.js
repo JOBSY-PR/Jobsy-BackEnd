@@ -67,11 +67,11 @@ export const signInEmployee = async (req, res) => {
       }
     });
 
-    // const isValid = await comparePassword(req.body.password, user.password);
+    const isValid = await comparePassword(req.body.password, user.password);
 
-    // if (!isValid) {
-    //   throw new Error("Invalid Credentials");
-    // }
+    if (!isValid) {
+      throw new Error("Invalid Credentials");
+    }
 
     // const token = createToken(employee);
     res.json(employee );
@@ -93,11 +93,11 @@ export const signInEmployer = async (req, res) => {
       }
     });
 
-    // const isValid = await comparePassword(req.body.password, user.password);
+    const isValid = await comparePassword(req.body.password, user.password);
 
-    // if (!isValid) {
-    //   throw new Error("Invalid Credentials");
-    // }
+    if (!isValid) {
+      throw new Error("Invalid Credentials");
+    }
 
     // const token = createToken(employer);
     res.json(employer );
