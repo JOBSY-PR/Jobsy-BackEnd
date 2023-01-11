@@ -40,9 +40,9 @@ model bid {
   belongToEmployee  Int
   job               String
   isSelected     Boolean  @default(false)
-  belongsToEmployee employee @relation(fields: [belongToEmployee], references: [id])
+  belongsToEmployee employee @relation(fields: [belongToEmployee], references: [id], onDelete: Cascade, onUpdate: Cascade)
   belongToJob       Int    
-  belongsToJob      job      @relation(fields: [belongToJob], references: [id])
+  belongsToJob      job      @relation(fields: [belongToJob], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   // @@id([belongToEmployee, belongToJob])
 }
