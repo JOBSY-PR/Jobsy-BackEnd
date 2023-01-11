@@ -86,6 +86,11 @@ router.delete('/status/:id', async(req,res)=>{
               id: parseInt(req.params.id)
           },
       })
+
+      if(!job){
+        throw new Error("Job could not be deleted")
+      }
+      res.json({message: "Job deleted successfully"})
   }catch(e){
       res.status(500).json({message:e.message})
   }
